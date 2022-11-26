@@ -30,7 +30,7 @@ const Poll = ({ questions, users, loggingUser, questionType }) => {
               : ""}{" "}
             ask:
           </div>
-          {(questionType === "unanswered" && isShowPollResult === false) ? (
+          {(questionType === "unanswered") ? (
             <div id="optionsToChoose">
               <div>Would you rather?</div>
               <Button
