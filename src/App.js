@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import CreatePollPage from "./pages/CreatePollPage";
+import LeaderBoard from "./pages/LeaderBoard";
+import { useSelector } from "react-redux";
+import NaviagionBar from "./component/NavigationBar";
 
-function App() {
+const App = () => {
+  const userId = localStorage.getItem("userId");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        {userId ? <NaviagionBar /> : <></>}
+        <Routes>
+          {userId ? (
+            <>
+              <Route
+                exact
+                path="/Homepage"
+                element={<HomePage userId={userId} />}
+              />
+              <Route
+                exact
+                path="/CreatePollPage"
+                element={<CreatePollPage userId={userId} />}
+              />
+              <Route
+                exact
+                path="/LeaderBoard"
+                element={<LeaderBoard userId={userId} />}
+              />
+            </>
+          ) : (
+            <Route exact path="*" element={<LoginPage />} />
+          )}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
