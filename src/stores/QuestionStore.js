@@ -47,22 +47,21 @@ export const questionReducer = (state = initialState, action) => {
       const questionId = action.payload.answer.id
       const optionAnswer = action.payload.answer.vote
       const answerer = action.payload.answerer;
-      const newVote = state.questions[questionId][optionAnswer].votes.push(answerer);
-      console.log(state.questions[questionId][optionAnswer].votes);
-      console.log(newVote);
-      console.log(typeof(newVote));
+      const newVote = state.questions[questionId][optionAnswer];
+      const concatNewVote = newVote.votes.concat(answerer);
       const updatedState = {
         ...state.questions,
         [questionId] : {
           ...state.questions[questionId],
           [optionAnswer]: {
             ...state.questions[questionId][optionAnswer],
-            votes: state.questions[questionId][optionAnswer].votes
+            votes: concatNewVote
           }
         }
       }
+      state.questions = updatedState;
       console.log(state);
-      return {...state, questions: updatedState}
+      return state
     default:
       return state;
   }

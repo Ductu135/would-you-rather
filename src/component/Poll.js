@@ -8,7 +8,6 @@ import { saveQuestionAnswer } from "../utilities/InitialDataAPI";
 
 const Poll = ({ questions, users, loggingUser, questionType }) => {
   const classes = useStyles();
-  const [isShowPollResult, setIsShowPollResult] = useState(false);
   const dispatch = useDispatch();
   const handleClick = (option) => {
     const questionAnswer = {
@@ -17,7 +16,6 @@ const Poll = ({ questions, users, loggingUser, questionType }) => {
     }
     const loggingUserId = loggingUser.id;
     dispatch(saveQuestionAnswer(questionAnswer, loggingUserId))
-    //setIsShowPollResult(true);
   };
   const userToShow = users.find((u) => u.id === questions.author);
 

@@ -2,7 +2,7 @@
 export const AUTHEN = "AUTHEN";
 export const GET_USERS = "GET_USERS";
 export const SAVE_CREATED_QUESTION = "SAVE_CREATED_QUESTION";
-export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
+export const SAVE_USER_ANSWER = "SAVE_USER_ANSWER";
 
 export const getUsers = (users) => {
   return {
@@ -20,7 +20,7 @@ export const saveQuestionAuthor = (questionId, userId) => {
 
 export const saveUserAnswer = (answer, answerer) => {
   return {
-    type: SAVE_QUESTION_ANSWER,
+    type: SAVE_USER_ANSWER,
     payload: { answer: answer, answerer: answerer },
   };
 };
@@ -49,7 +49,7 @@ export const userReducer = (state = initialState, action) => {
         },
       };
       return { ...state, users: result };
-    case SAVE_QUESTION_ANSWER:
+    case SAVE_USER_ANSWER:
       const question = action.payload.answer.id;
       const optionAnswer = action.payload.answer.vote;
       const answerer = action.payload.answerer;

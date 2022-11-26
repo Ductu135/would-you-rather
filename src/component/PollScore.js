@@ -8,10 +8,6 @@ const PollScore = ({ question }) => {
 
   const percentageOfOptionTwo = (numberOfVoteOptionTwo / totalVote) * 100;
 
-  console.log(question.id);
-  console.log(question.optionOne.votes);
-  console.log(question.optionTwo.votes);
-
   return (
     <div className="container" style={{ fontFamily: '"Segoe UI"' }}>
       <div>
