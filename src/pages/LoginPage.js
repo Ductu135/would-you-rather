@@ -7,6 +7,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { authen } from "../stores/UserStore";
 
 const LoginPage = () => {
   const classes = useStyles();
@@ -14,6 +15,7 @@ const LoginPage = () => {
   const [selectedUserId, setselectedUserId] = useState("");
   const state = useSelector((state) => state.user);
   const users = Object.values(state.users);
+  const dispatch = useDispatch();
 
   const handleSetValue = (e) => {
     setselectedUserId(e);
@@ -22,11 +24,12 @@ const LoginPage = () => {
   const login = () => {
     const userId = selectedUserId;
     if (userId) {
-      localStorage.setItem("userId", userId);
+      //localStorage.setItem("userId", userId);
+      dispatch(authen(userId));
       var userName = users.find((u) => u.id === userId);
       localStorage.setItem("userName", userName.name);
     }
-    window.location.assign("/HomePage");
+    navigate("/homepage");
   };
 
   return (

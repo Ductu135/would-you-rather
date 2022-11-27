@@ -8,9 +8,10 @@ import LeaderBoard from "./pages/LeaderBoard";
 import NotFound from "./pages/NotFound";
 import PollDetail from "./pages/PollDetail";
 import NaviagionBar from "./component/NavigationBar";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const userId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.user.userId);
   return (
     <div>
       <BrowserRouter>
@@ -38,11 +39,7 @@ const App = () => {
                 path="/question/:questionId"
                 element={<PollDetail userId={userId} />}
               />
-              <Route
-                exact
-                path="/404"
-                element={<NotFound userId={userId} />}
-              />
+              <Route exact path="/404" element={<NotFound userId={userId} />} />
             </>
           ) : (
             <Route exact path="*" element={<LoginPage />} />

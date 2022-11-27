@@ -4,6 +4,13 @@ export const GET_USERS = "GET_USERS";
 export const SAVE_CREATED_QUESTION = "SAVE_CREATED_QUESTION";
 export const SAVE_USER_ANSWER = "SAVE_USER_ANSWER";
 
+export const authen = (userId) => {
+  return {
+    type: AUTHEN,
+    payload: userId,
+  };
+};
+
 export const getUsers = (users) => {
   return {
     type: GET_USERS,
@@ -27,12 +34,18 @@ export const saveUserAnswer = (answer, answerer) => {
 //#endregion
 
 export const initialState = {
+  userId: "",
   users: {},
 };
 
 //#region reducers
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTHEN:
+      return {
+        ...state,
+        userId: action.payload,
+      };
     case GET_USERS:
       return {
         ...state,
