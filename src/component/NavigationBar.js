@@ -25,7 +25,7 @@ const NaviagionBar = () => {
           <Link
             color="inherit"
             onClick={(e) => {
-              handleNavigate("/HomePage");
+              handleNavigate("/homepage");
             }}
           >
             Home
@@ -33,7 +33,7 @@ const NaviagionBar = () => {
           <Link
             color="inherit"
             onClick={(e) => {
-              handleNavigate("/LeaderBoard");
+              handleNavigate("/leaderboard");
             }}
           >
             LeaderBoard
@@ -41,7 +41,7 @@ const NaviagionBar = () => {
           <Link
             color="textPrimary"
             onClick={(e) => {
-              handleNavigate("/CreatePollPage");
+              handleNavigate("/add");
             }}
           >
             Create New Poll

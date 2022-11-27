@@ -47,7 +47,7 @@ const LeaderBoard = ({ userId }) => {
       {leaderBoard ? (
         leaderBoard.map((leader) => {
           return (
-            <div className={classes.root}>
+            <div key={leader.userId} className={classes.root}>
               <Avatar src={leader.avatarURL} />
               <div>
                 <div>{leader.name}</div>

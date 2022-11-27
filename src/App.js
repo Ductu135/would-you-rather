@@ -5,7 +5,8 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import CreatePollPage from "./pages/CreatePollPage";
 import LeaderBoard from "./pages/LeaderBoard";
-import { useSelector } from "react-redux";
+import NotFound from "./pages/NotFound";
+import PollDetail from "./pages/PollDetail";
 import NaviagionBar from "./component/NavigationBar";
 
 const App = () => {
@@ -19,18 +20,28 @@ const App = () => {
             <>
               <Route
                 exact
-                path="/Homepage"
+                path="/homepage"
                 element={<HomePage userId={userId} />}
               />
               <Route
                 exact
-                path="/CreatePollPage"
+                path="/add"
                 element={<CreatePollPage userId={userId} />}
               />
               <Route
                 exact
-                path="/LeaderBoard"
+                path="/leaderboard"
                 element={<LeaderBoard userId={userId} />}
+              />
+              <Route
+                exact
+                path="/question/:questionId"
+                element={<PollDetail userId={userId} />}
+              />
+              <Route
+                exact
+                path="/404"
+                element={<NotFound userId={userId} />}
               />
             </>
           ) : (

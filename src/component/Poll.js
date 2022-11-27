@@ -4,20 +4,27 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import PollScore from "./PollScore";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { saveQuestionAnswer } from "../utilities/InitialDataAPI";
 
 const Poll = ({ questions, users, loggingUser, questionType }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClick = (option) => {
     const questionAnswer = {
       id: questions.id,
-      vote: option
-    }
+      vote: option,
+    };
     const loggingUserId = loggingUser.id;
-    dispatch(saveQuestionAnswer(questionAnswer, loggingUserId))
+    dispatch(saveQuestionAnswer(questionAnswer, loggingUserId));
   };
   const userToShow = users.find((u) => u.id === questions.author);
+
+  const ViewResult = (questionId) => {
+    const url = `/question/${questionId}`;
+      navigate(url);
+  };
 
   return (
     <div>
@@ -30,7 +37,7 @@ const Poll = ({ questions, users, loggingUser, questionType }) => {
               : ""}{" "}
             ask:
           </div>
-          {(questionType === "unanswered") ? (
+          {questionType === "unanswered" ? (
             <div id="optionsToChoose">
               <div>Would you rather?</div>
               <Button
@@ -54,7 +61,26 @@ const Poll = ({ questions, users, loggingUser, questionType }) => {
               </Button>
             </div>
           ) : (
-            <PollScore users={users} question={questions} />
+            <div>
+              Would you rather{" "}
+              <span style={{ fontStyle: "italic" }}>
+                {questions.optionOne.text}
+              </span>{" "}
+              <span style={{ fontWeight: "bold" }}>OR</span>{" "}
+              <span style={{ fontStyle: "italic" }}>
+                {questions.optionTwo.text}
+              </span>
+              <div>
+                <Button
+                  className={classes.button}
+                  onClick={(e) => {
+                    ViewResult(questions.id);
+                  }}
+                >
+                  View Poll Result
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </div>

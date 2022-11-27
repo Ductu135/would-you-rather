@@ -11,10 +11,7 @@ const HomePage = ({ userId }) => {
     useSelector((state) => state.question.questions)
   );
 
-  console.log(questionObject);
-
   const [questionType, setQuestionType] = useState("unanswered");
-
   const changeQuestionType = (type) => {
     if (type !== questionType) {
       setQuestionType(type);

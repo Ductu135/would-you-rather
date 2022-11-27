@@ -12,3 +12,4 @@ install all project dependencies with npm install
 start the development server with npm start
 
 Thank you.
+Author - Developer, Duc Tu

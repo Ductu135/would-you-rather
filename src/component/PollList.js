@@ -19,12 +19,14 @@ const PollList = ({ questions, users, questionType, userId }) => {
           const unansweredQuestions = getUnansweredQuestions(
             loggingAccount?.answers
           );
+          unansweredQuestions.sort((a, b) => b.timestamp - a.timestamp);
           setshowingQuestion(unansweredQuestions);
         } else {
           let answeredQuestions = [];
-          questionKeys.forEach(key => {
+          questionKeys.forEach((key) => {
             answeredQuestions.push(questions.find((q) => q.id === key));
           });
+          answeredQuestions.sort((a, b) => b.timestamp - a.timestamp);
           setshowingQuestion(answeredQuestions);
         }
         setloggingUser(loggingAccount);
@@ -50,12 +52,14 @@ const PollList = ({ questions, users, questionType, userId }) => {
         {showingQuestion ? (
           showingQuestion.map((question) => {
             return (
-              <Poll
-                questions={question}
-                users={users}
-                loggingUser={loggingUser}
-                questionType={questionType}
-              />
+              <div key={question.id}>
+                <Poll
+                  questions={question}
+                  users={users}
+                  loggingUser={loggingUser}
+                  questionType={questionType}
+                />
+              </div>
             );
           })
         ) : (
