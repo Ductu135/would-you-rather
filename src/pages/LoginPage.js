@@ -56,7 +56,7 @@ const LoginPage = () => {
               return <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>;
             })
           ) : (
-            <MenuItem value="">
+            <MenuItem value="" key="none">
               <em>None</em>
             </MenuItem>
           )}

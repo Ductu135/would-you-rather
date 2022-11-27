@@ -36,7 +36,7 @@ const App = () => {
               />
               <Route
                 exact
-                path="/question/:questionId"
+                path="/questions/:questionId"
                 element={<PollDetail userId={userId} />}
               />
               <Route exact path="/404" element={<NotFound userId={userId} />} />

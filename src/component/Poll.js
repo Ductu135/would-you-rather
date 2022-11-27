@@ -22,7 +22,7 @@ const Poll = ({ questions, users, loggingUser, questionType }) => {
   const userToShow = users.find((u) => u.id === questions.author);
 
   const ViewResult = (questionId) => {
-    const url = `/question/${questionId}`;
+    const url = `/questions/${questionId}`;
       navigate(url);
   };
 
