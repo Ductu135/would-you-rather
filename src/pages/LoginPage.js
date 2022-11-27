@@ -50,7 +50,7 @@ const LoginPage = () => {
         >
           {users ? (
             users.map((user) => {
-              return <MenuItem value={user.id}>{user.name}</MenuItem>;
+              return <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>;
             })
           ) : (
             <MenuItem value="">
