@@ -10,7 +10,7 @@ const NaviagionBar = () => {
   const classes = useStyles();
   var userName = localStorage.getItem("userName");
   const logout = () => {
-    localStorage.removeItem("userId");
+    //localStorage.removeItem("userId");
     window.location.href = "/";
   };
 

@@ -14,7 +14,7 @@ const PollDetail = ({ userId }) => {
   const userObject = Object.values(useSelector((state) => state.user.users));
   console.log(questionObject);
   const questionToShow = questionObject.find((q) => q.id === questionId);
-  const userToShow = userObject.find((u) => u.id === questionToShow.author);
+  const userToShow = userObject.find((u) => u.id === questionToShow?.author);
 
   console.log(questionToShow);
   return questionToShow ? (

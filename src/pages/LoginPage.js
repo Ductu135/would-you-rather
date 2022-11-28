@@ -5,12 +5,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authen } from "../stores/UserStore";
 
-const LoginPage = () => {
+const LoginPage = ({ isLoggingOut }) => {
   const classes = useStyles();
+  const [isNewSignIn, setIsNewSignIn] = useState(true);
   const navigate = useNavigate();
   const [selectedUserId, setselectedUserId] = useState("");
   const state = useSelector((state) => state.user);
@@ -21,15 +22,28 @@ const LoginPage = () => {
     setselectedUserId(e);
   };
 
+  const location = useLocation();
+  const existedPath = ["/homepage", "/leaderboard", "/add", "/"];
+
+  if (location.pathname === "/" && isNewSignIn === true) {
+    location.pathname = "/homepage";
+  } else if (
+    !existedPath.find((path) => path === location.pathname) &&
+    !location.pathname.includes("questions")
+  ) {
+    location.pathname = "/404";
+  }
+
   const login = () => {
     const userId = selectedUserId;
     if (userId) {
-      //localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", userId);
       dispatch(authen(userId));
       var userName = users.find((u) => u.id === userId);
       localStorage.setItem("userName", userName.name);
     }
-    navigate("/homepage");
+    setIsNewSignIn(false);
+    navigate({ location }, { replace: true });
   };
 
   return (
@@ -53,7 +67,11 @@ const LoginPage = () => {
         >
           {users ? (
             users.map((user) => {
-              return <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>;
+              return (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name}
+                </MenuItem>
+              );
             })
           ) : (
             <MenuItem value="" key="none">
